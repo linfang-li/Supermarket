@@ -16,7 +16,6 @@
               <h3 v-show="count[index]">{{count[index]}}</h3>
               <i class="el-icon-circle-plus f20" @click="increment(index,item.id)"></i>
             </div>
-
           </div>
         </div>
       </div>
