@@ -1,7 +1,10 @@
 <template>
-  <div id="app">
-    <router-view/>
-  </div>
+  <keep-alive>
+    <div id="app">
+      <router-view/>
+      <router-view name="footer"/>
+    </div>
+  </keep-alive>
 </template>
 
 <script>

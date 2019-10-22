@@ -27,27 +27,28 @@ export default {
   // 获取商品列表
   [types.SET_GOODS] (state) {
     getGoods().then((response) => {
+      // debugger
       // 更新store数据
       state.Goods = response.data.results
-      state.Sum = response.data.count
       // console.log(response.data.results)
     }).catch(function (error) {
       console.log(error)
     })
   },
-  // 获取购物车数据
+  // 获取购物车数据updateShopList
   [types.SET_SHOPLIST] (state) {
     getShopCarts().then((response) => {
       // 更新store数据
-      state.goodsList.goodsList = response.data
-      // console.log(response.data)
-      let Price = 0
-      response.data.forEach(function (entry) {
-        Price += entry.goods.shop_price * entry.nums
-      })
-      state.goodsList.totalPrice = Price
+      state.goodsList = response.data
     }).catch(function (error) {
       console.log(error)
     })
+  },
+  // 更新购物车数据updateShopList
+  [types.UPDATE_SHOPLIST] (state, goodInfo) {
+    // 更新store数据
+    state.goodsList[goodInfo.index].nums = goodInfo.goodnum
+    console.log(state.goodsList)
+    debugger
   }
 }

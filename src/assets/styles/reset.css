@@ -41,6 +41,15 @@ a {color: #25a4bb}
 .w80{width:.80rem}
 .w90{width:.90rem}
 .w100{width:1rem}
+/* min-width */
+.minw30{min-width:.30rem}
+.minw40{min-width:.40rem}
+.minw50{min-width:.50rem}
+.minw60{min-width:.60rem}
+.minw70{min-width:.70rem}
+.minw80{min-width:.80rem}
+.minw90{min-width:.90rem}
+.minw100{min-width:1rem}
 /* percent width value */
 .pw10{width:10%}
 .pw15{width:15%}

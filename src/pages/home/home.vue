@@ -1,33 +1,30 @@
 <template>
-  <keep-alive>
-    <div class="background1">
-      <div class="background2">
-        <home-header></home-header>
-        <home-icon></home-icon>
-      </div>
-      <home-recommend></home-recommend>
-      <home-footer></home-footer>
+  <div class="background1">
+    <div class="background2">
+      <home-header></home-header>
+      <home-icon></home-icon>
     </div>
-  </keep-alive>
+    <home-recommend></home-recommend>
+  </div>
 </template>
 
 <script>
 import homeHeader from '@/components/home/homeHeader'
 import homeIcon from '@/components/home/homeIcon'
 import homeRecommend from '@/components/home/homeRecommend'
-import homeFooter from '@/components/home/homeFooter'
 
 export default {
   name: 'home',
   components: {
     homeHeader,
     homeIcon,
-    homeRecommend,
-    homeFooter
+    homeRecommend
   },
   created () {
+    // this.$store.dispatch('setInfo')
     this.$store.dispatch('setCategory')
     this.$store.dispatch('setGoods')
+    // this.$store.dispatch('setShopList')
   }
 }
 </script>

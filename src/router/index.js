@@ -4,15 +4,20 @@ import store from '@/store/index'
 import home from '@/pages/home/home'
 import login from '@/pages/login/login'
 import cart from '@/pages/cart/cart'
+import order from '@/pages/order/order'
 import category from '@/pages/category/category'
 import myinfo from '@/pages/myinfo/myinfo'
+import Footer from '@/components/footer/Footer'
 
 Vue.use(Router)
 const router = new Router({
   routes: [{
     path: '/',
     name: 'home',
-    component: home,
+    components: {
+      default: home,
+      footer: Footer
+    },
     meta: {
       title: '首页',
       need_log: false
@@ -21,16 +26,34 @@ const router = new Router({
   {
     path: '/cart',
     name: 'cart',
-    component: cart,
+    components: {
+      default: cart,
+      footer: Footer
+    },
     meta: {
       title: '购物车',
       need_log: true
     }
   },
   {
+    path: '/order',
+    name: 'order',
+    components: {
+      default: order,
+      footer: Footer
+    },
+    meta: {
+      title: '订单',
+      need_log: true
+    }
+  },
+  {
     path: '/myinfo',
     name: 'myinfo',
-    component: myinfo,
+    components: {
+      default: myinfo,
+      footer: Footer
+    },
     meta: {
       title: '我的',
       need_log: true

@@ -9,12 +9,11 @@
           <div class="text aisb">
             <h3 class="mb10">{{item.name + item.goods_brief}}</h3>
             <div class="jcsb col1">
-              <h3 class="mr10">￥{{item.shop_price}}</h3>
+              <h3 class="mr10 col4">￥{{item.shop_price}}</h3>
               <i class="el-icon-remove-outline f20"
-                 v-show="count[index]"
-                 @click="decrease(index,item.id)"></i>
-              <h3 v-show="count[index]">{{count[index]}}</h3>
-              <i class="el-icon-circle-plus f20" @click="increment(index,item.id)"></i>
+                 @click="decrease(index, item.id, item.shop_cart_num)"></i>
+              <h3>{{item.shop_cart_num}}</h3>
+              <i class="el-icon-circle-plus f20" @click="increment(index, item.id, item.shop_cart_num)"></i>
             </div>
           </div>
         </div>
@@ -29,40 +28,46 @@ import BScroll from 'better-scroll'
 import { addShopCart, updateShopCart } from '@/api/api'
 export default {
   name: 'homeRecommend',
-  data () {
-    return {
-      count: new Array(10)
-    }
-  },
   computed: {
     ...mapState(['Goods'])
   },
   methods: {
-    decrease (index, id) {
-      updateShopCart(id, {
-        nums: this.count[index] - 1
-      }).then((response) => {
-        this.count[index] = response.nums
-        // 更新store数据
-        this.$store.dispatch('setShopList')
-      }).catch(function (error) {
-        console.log(error)
-      })
+    decrease (index, id, nums) {
+      const that = this
+      if (nums > 1) {
+        updateShopCart(id, {
+          nums: nums - 1
+        }).then((response) => {
+          that.Goods[index].shop_cart_num = response.data.nums
+          // console.log(response.nums)
+          // debugger
+          // 更新store数据
+          that.$store.dispatch('setShopList')
+        }).catch(function (error) {
+          console.log(error)
+        })
+      }
     },
-    increment (index, id) {
-      // 添加到购物车
-      addShopCart({
-        goods: id, // 商品id
-        nums: 1 // 加入数量
-      }).then((response) => {
-        this.count[index] = response.data.nums
-        console.log(this.count)
-        debugger
-        // 更新store数据
-        this.$store.dispatch('setShopList')
-      }).catch(function (error) {
-        console.log(error)
-      })
+    increment (index, id, nums) {
+      const that = this
+      if (!that.$store.state.userInfo.token) {
+        that.$router.push({
+          name: 'login'
+        })
+      } else {
+        // 添加到购物车
+        addShopCart({
+          goods: id, // 商品id
+          nums: 1 // 加入数量
+        }).then((response) => {
+          console.log(response.data)
+          that.Goods[index].shop_cart_num = response.data.nums
+          // 更新store数据
+          that.$store.dispatch('setShopList')
+        }).catch(function (error) {
+          console.log(error)
+        })
+      }
     }
   },
   mounted () {

@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: 'homeFooter',
+  name: 'Footer',
   data () {
     return {
       click: 1,
@@ -43,6 +43,7 @@ export default {
     height :.6rem
     background :#fff
     color :#606266
+    box-sizing :border-box
     border-top :.01rem solid #EBEEF5
     i
       font-size :.28rem

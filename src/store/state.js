@@ -4,15 +4,10 @@ const userInfo = {
   name: cookie.getCookie('name') || '',
   token: cookie.getCookie('token') || ''
 }
-const goodsList = {
-  totalPrice: '',
-  goodsList: []
-}
 
 export default {
   userInfo,
-  goodsList,
+  goodsList: [],
   cateGory: [],
-  Goods: [],
-  Sum: ''
+  Goods: []
 }

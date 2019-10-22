@@ -8,3 +8,6 @@ export const SET_GOODS = 'SET_GOODS'
 
 // 获取购物车数据
 export const SET_SHOPLIST = 'SET_SHOPLIST'
+
+// 更新购物车数据
+export const UPDATE_SHOPLIST = 'UPDATE_SHOPLIST'
