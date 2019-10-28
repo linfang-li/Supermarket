@@ -10,16 +10,16 @@
       </div>
     </div>
     <div class="main">
-      <div class="list" v-for="good of showGoods" :key="good.id">
+      <div class="list" v-for="(good, index) of showGoods" :key="good.id">
         <img :src="good.goods_front_image" alt="" class="imge">
         <div class="aisb fle1 pl10">
           <h3>{{good.name + good.goods_brief}}</h3>
           <div class="jcsb">
             <h3 class="col4">￥{{good.shop_price}}</h3>
             <div class="f22 col1 pr10">
-              <i class="el-icon-remove-outline" @click="decrease" v-show="count"></i>
-              <span v-show="count">{{count}}</span>
-              <i class="el-icon-circle-plus" @click="increment"></i>
+              <i class="el-icon-remove-outline" @click="decrease(index, good.id, good.shop_cart_num)" v-show="good.shop_cart_num"></i>
+              <span v-show="good.shop_cart_num">{{good.shop_cart_num}}</span>
+              <i class="el-icon-circle-plus" @click="increment(index, good.id)"></i>
             </div>
           </div>
         </div>
@@ -30,14 +30,13 @@
 
 <script>
 import {mapState} from 'vuex'
+import { updateShopCart, addShopCart } from '@/api/api'
 
 export default {
   name: 'categoryBody',
   data () {
-    // console.log(this.$route.query.id)
     return {
-      click: this.$route.query.id,
-      count: 0
+      click: this.$route.query.id
     }
   },
   computed: {
@@ -47,11 +46,40 @@ export default {
     }
   },
   methods: {
-    decrease () {
-      this.count--
+    decrease (index, id, nums) {
+      const that = this
+      if (nums > 1) {
+        updateShopCart(id, {
+          nums: nums - 1
+        }).then((response) => {
+          that.showGoods[index].shop_cart_num = response.data.nums
+          // 更新store数据
+          that.$store.dispatch('setShopList')
+        }).catch(function (error) {
+          console.log(error)
+        })
+      }
     },
-    increment () {
-      this.count++
+    increment (index, id) {
+      const that = this
+      if (!that.$store.state.userInfo.token) {
+        that.$router.push({
+          name: 'login'
+        })
+      } else {
+        // 添加到购物车
+        addShopCart({
+          goods: id, // 商品id
+          nums: 1 // 加入数量
+        }).then((response) => {
+          // console.log(response.data)
+          that.showGoods[index].shop_cart_num = response.data.nums
+          // 更新store数据
+          that.$store.dispatch('setShopList')
+        }).catch(function (error) {
+          console.log(error)
+        })
+      }
     },
     cutTabClick (id) {
       this.click = id

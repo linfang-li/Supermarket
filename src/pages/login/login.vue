@@ -22,7 +22,8 @@
       <p v-show="error">{{error}}</p>
     </div>
     <el-footer>
-      <el-button type="primary" class="width" @click="handleLogin">登录</el-button>
+      <el-button type="primary" class="width" @click="handleLogin">登录</el-button>\
+      <div style="text-align: center">帐号：test 密码：qazw1234</div>
     </el-footer>
   </el-container>
 </template>

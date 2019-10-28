@@ -4,7 +4,7 @@
       <i class="el-icon-arrow-left iconstyle f26" @click="goBack"></i>
       <span class="f22 fle1">分类</span>
       <router-link to="/cart" class="colb pl10">
-        <el-badge :value="3" class="item">
+        <el-badge :value="$store.state.goodsList.length" class="item">
           <i class="el-icon-shopping-cart-1 f28"></i>
         </el-badge>
       </router-link>

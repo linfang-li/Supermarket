@@ -49,6 +49,5 @@ export default {
     // 更新store数据
     state.goodsList[goodInfo.index].nums = goodInfo.goodnum
     console.log(state.goodsList)
-    debugger
   }
 }

@@ -13,7 +13,7 @@
               <i class="el-icon-remove-outline f20"
                  @click="decrease(index, item.id, item.shop_cart_num)"></i>
               <h3>{{item.shop_cart_num}}</h3>
-              <i class="el-icon-circle-plus f20" @click="increment(index, item.id, item.shop_cart_num)"></i>
+              <i class="el-icon-circle-plus f20" @click="increment(index, item.id)"></i>
             </div>
           </div>
         </div>
@@ -39,8 +39,6 @@ export default {
           nums: nums - 1
         }).then((response) => {
           that.Goods[index].shop_cart_num = response.data.nums
-          // console.log(response.nums)
-          // debugger
           // 更新store数据
           that.$store.dispatch('setShopList')
         }).catch(function (error) {
@@ -48,7 +46,7 @@ export default {
         })
       }
     },
-    increment (index, id, nums) {
+    increment (index, id) {
       const that = this
       if (!that.$store.state.userInfo.token) {
         that.$router.push({
@@ -60,7 +58,7 @@ export default {
           goods: id, // 商品id
           nums: 1 // 加入数量
         }).then((response) => {
-          console.log(response.data)
+          // console.log(response.data)
           that.Goods[index].shop_cart_num = response.data.nums
           // 更新store数据
           that.$store.dispatch('setShopList')

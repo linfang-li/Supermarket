@@ -32,6 +32,7 @@ a {color: #25a4bb}
 .h22{height:.22rem}
 .h24{height:.24rem}
 .h30{height:.30rem}
+.h100{height:1rem}
 /* width */
 .w30{width:.30rem}
 .w40{width:.40rem}
@@ -225,3 +226,9 @@ a {color: #25a4bb}
 /* 单行文字溢出虚点显示*/
 .ell{text-overflow:ellipsis;white-space:nowrap;overflow:hidden}
 * { touch-action:pan-y}
+input{
+  outline-style: none ;
+  width: .18rem;
+  height: .18rem;
+  font-size: .16rem;
+}
