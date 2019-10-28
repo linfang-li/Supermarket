@@ -1,6 +1,8 @@
-# 名字：supermarket
+# 名字：
+supermarket
 
-# 简介：supermarket是用Vue写的超市电商前端项目
+# 简介：
+supermarket是用Vue写的超市电商前端项目
 
 # 功能：
 1.  获取token结合vuex实现登录功能；
